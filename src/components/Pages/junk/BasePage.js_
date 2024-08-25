@@ -1,0 +1,30 @@
+import { Component } from "react";
+
+export default class BasePage extends Component{
+
+    userInfo=null;
+    authService=null;
+    onDataUpdated=null;
+    constructor(props){
+        super(props);
+        window.addEventListener('loginupdated', (e)=>{
+            console.log('loginupdated', e)
+            if(this.onDataUpdated)this.onDataUpdated(e)
+        })
+    }
+
+    getUserInfo=()=>{return (this.props.loginData.user)?this.props.loginData.user:null}
+    getAuthService=()=>{console.log(this.props.rootHook);return this.props.rootHook.authService}
+
+    setLoginData=(data)=>{
+        this.props?.rootHook?.storeLoginData(data)
+    }
+
+    isUserLoggedIn = ()=>{
+        return this.getUserInfo() !== null;
+    }
+
+    showToast=(msg,type)=>{
+        this.props?.rootHook?.showToast(msg,type)
+    }
+}

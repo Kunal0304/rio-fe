@@ -1,0 +1,2761 @@
+import React, { Component } from 'react';
+import AwesomeSlider from 'react-awesome-slider';
+import 'react-awesome-slider/dist/styles.css';
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import HomeService from '../../service/HomeService';
+import WebService from '../../service/WebService';
+import PopularCategoryItem from '../views/PopularCategoryItem';
+function SampleNextArrow(props) {
+    const { className, style, onClick } = props;
+    return ( <
+        div className = { className }
+        style = {
+            {...style, display: "block", background:"transparent" } }
+        onClick = { onClick }
+        />
+    );
+}
+
+function SamplePrevArrow(props) {
+    const { className, style, onClick } = props;
+    return ( <
+        div className = { className }
+        style = {
+            {...style, display: "block",background:"transparent"   } }
+        onClick = { onClick }
+        />
+    );
+}
+class Home extends Component {
+    constructor(props){;
+        super(props);
+        this.state={
+            productList:[]
+        }
+    }
+
+
+    componentDidMount(){
+        WebService.getHomePageData()
+        .then(req=>{
+            const data = req.data;
+            console.log(data.category)
+            this.setState({productList:data.category})
+        })
+        .catch(err=>{console.log(err)})
+        .finally(()=>{console.log("home page data request finished")})
+    }
+
+    render() {
+        
+        const settings = {
+            dots: false,
+            infinite: true,
+            speed: 500,
+            slidesToShow: 5,
+            slidesToScroll: 5,
+            initialSlide: 0,
+            prevArrow: false,
+            nextArrow: false,
+            responsive: [{
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 3,
+                        infinite: true,
+                        dots: true
+                    }
+                },
+                {
+                    breakpoint: 600,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2,
+                        initialSlide: 2
+                    }
+                },
+                {
+                    breakpoint: 480,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1
+                    }
+                }
+            ]
+        };
+        const settingsTestimonials = {
+            dots: false,
+            infinite: true,
+            speed: 500,
+            slidesToShow: 3,
+            slidesToScroll: 3,
+            prevArrow: true,
+            nextArrow: true,
+            nextArrow: < SampleNextArrow / > ,
+            prevArrow: < SamplePrevArrow / >
+        };
+        return (
+            <div>
+                
+        <section className="banner banner--01">
+            <div className="container">
+                <div className="banner__wrapper row">
+                    <div className="col-lg-8 col-sm-3 col-xs-2 col-6">
+                        
+                        <AwesomeSlider>
+                            <div data-src="assets/images/banner/banner-lg-03.png" className='text-section'> 
+                                <h1>RIO Aarman</h1>
+                               <p> sale up to 30 %</p>
+                                
+                                <button type='button' className='btn-slider'>Shop Now</button>
+                            </div>
+                            <div data-src="assets/images/banner/banner-lg-03.png" className='text-section'>  
+                            <h1>Fresh Organic Food</h1>
+                            <p> sale up to 30 %</p>
+                            <button type='button' className='btn-slider'>Shop Now</button></div>
+                        </AwesomeSlider>
+
+                    </div>
+                    <div className="col-lg-4 col-sm-3 col-xs-2 col-6">
+                        <div className="banner__wrapper-img-sm">
+                            <div className="banner__wrapper-img banner__wrapper--img-02">
+                                <img src="assets/images/banner/banner-sm-05.png" alt="banner" />
+
+                                <div className="banner__wrapper-text">
+                                    <h5 className="font-body--md-500">Summer Sale</h5>
+                                    <h2 className="font-title--sm">75% off</h2>
+                                    <p className="font-body--md-400">Locks & Screws</p>
+                                    <a href="#" className="button button--md">
+                                        Shop now
+                                        <span>
+                                           <i className="fa fa-arrow-right whit"></i>
+                                        </span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div className="banner__wrapper-img banner__wrapper--img-03 nones">
+                                <img src="assets/images/banner/banner-sm-04.png" alt="banner" />
+
+                                <div className="banner__wrapper-text">
+                                    <h5 className="font-body--md-500">Best Deal</h5>
+                                    <h2 className="font-title--sm">
+                                        Special Products Deal of the Month
+                                    </h2>
+
+                                    <a href="#" className="button button--md">
+                                        Shop now
+                                        <span>
+                                            <i className="fa fa-arrow-right whit"></i>
+                                        </span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </section>
+
+        <section className="shipping-container section section--md pt-0">
+            <div className="container">
+                <div className="cards-ship cards-ship--one free">
+                    <div className="cards-ship__item">
+                        <span className="cards-ship__item-icon">
+                          <i className="fa fa-truck icons"></i>
+                        </span>
+                       
+                        <div className="cards-ship__item-process-info">
+                            <h2 className="font-body--lg-600">Free Shipping</h2>
+                            <p className="font-body--md-400">Free shipping on all your order</p>
+                        </div>
+                    </div>
+                    <div className="cards-ship__item">
+                        <span className="cards-ship__item-icon">
+                            <i className="fa fa-headphones icons"></i>
+                        </span>
+                        <div className="cards-ship__item-process-info">
+                            <h2 className="font-body--lg-600">Customer Support 24/7</h2>
+                            <p className="font-body--md-400">Instant access to Support</p>
+                        </div>
+                    </div>
+                    <div className="cards-ship__item">
+                        <span className="cards-ship__item-icon">
+                            <i className="fa fa-briefcase icons"></i>
+                        </span>
+                        <div className="cards-ship__item-process-info">
+                            <h2 className="font-body--lg-600">100% Secure Payment</h2>
+                            <p className="font-body--md-400">We ensure your money is save</p>
+                        </div>
+                    </div>
+                    <div className="cards-ship__item">
+                        <span className="cards-ship__item-icon">
+                            <i className="fa fa-check icons"></i>
+                        </span>
+                        <div className="cards-ship__item-process-info">
+                            <h2 className="font-body--lg-600">Money-Back Guarantee</h2>
+                            <p className="font-body--md-400">30 Days Money-Back Guarantee</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className="rt">
+                <div className="container">
+                    <div className="row">
+
+                    <div className="col-md-2 col-sm-3 col-xs-2 col-3">
+                    <a href="# " className="cards-sm popular-categories__wrapper-item">
+                        <div className="cards-sm__img-wrapper">
+                            <img src="assets/images/categories/rio.png" alt="img-01" />
+                        </div>
+                        <h5 className="font-body--xl-500">Rio</h5>
+                    </a>
+                   </div>
+                   
+                   
+                   
+                   <div className="col-md-2 col-sm-3 col-xs-2 col-3">
+                        <a href="# " className="cards-sm popular-categories__wrapper-item">
+                            <div className="cards-sm__img-wrapper">
+                                <img src="assets/images/products/df.png" alt="img-01" />
+                            </div>
+                            <h5 className="font-body--xl-500">Lock</h5>
+                        </a>
+                   </div>
+                   
+                   
+                   
+                   
+                   <div className="col-md-2 col-sm-3 col-xs-2 col-3">
+<a href="# " className="cards-sm popular-categories__wrapper-item">
+                        <div className="cards-sm__img-wrapper">
+                            <img src="assets/images/products/wheel.png" alt="img-01" />
+                        </div>
+                        <h5 className="font-body--xl-500">Wheels</h5>
+                    </a>
+                   </div>
+                   
+                   <div className="col-md-2 col-sm-3 col-xs-2 col-3">
+<a href="# " className="cards-sm popular-categories__wrapper-item">
+                        <div className="cards-sm__img-wrapper">
+                            <img src="assets/images/products/gate.png" alt="img-01" />
+                        </div>
+                        <h5 className="font-body--xl-500">Patch</h5>
+                    </a>
+                   </div>
+                   
+                   
+                  
+                   </div>
+                   
+                   <div className="row ptt">
+                        
+                   
+                   
+                   
+                   <div className="col-md-2 col-sm-3 col-xs-2 col-3">
+<a href="# " className="cards-sm popular-categories__wrapper-item">
+                        <div className="cards-sm__img-wrapper">
+                            <img src="assets/images/products/ewe.png" alt="img-01" />
+                        </div>
+                        <h5 className="font-body--xl-500">Hooks</h5>
+                    </a>
+                   </div>
+                   
+                   
+                   
+                   <div className="col-md-2 col-sm-3 col-xs-2 col-3">
+<a href="# " className="cards-sm popular-categories__wrapper-item">
+                        <div className="cards-sm__img-wrapper">
+                            <img src="assets/images/products/df.png" alt="img-01" />
+                        </div>
+                        <h5 className="font-body--xl-500">Fiting</h5>
+                    </a>
+                   </div>
+                   </div>
+                </div>
+                
+            </div>
+        </section>
+
+        <section className="popular-categories section section--md">
+            <div className="container">
+                <div className="section__head">
+                    <h2 className="section--title-one font-title--sm">Popular Categories</h2>
+                    <a href="shop-01.html">
+                        View All
+                        <span>
+                           <i className="fa fa-arrow-right"></i>
+                        </span>
+                    </a>
+                </div>
+                <div className="popular-categories__wrapper">
+                {this.state.productList.map((item, i)=>{
+                    const {id} = item
+                    return <PopularCategoryItem 
+                        item={item}
+                        key={id}
+                    />
+                })}
+                </div>
+
+
+                <div className="swiper-container popular-categories--slider">
+                    <div className="swiper-wrapper">
+                        <div className="swiper-slide">
+                            <a href="# " className="cards-sm popular-categories__wrapper-item">
+                                <div className="cards-sm__img-wrapper">
+                                    <img src="assets/images/categories/rio.png" alt="img-01" />
+                                </div>
+                                <h5 className="font-body--xl-500">Rio Aarman</h5>
+                            </a>
+                        </div>
+
+                        <div className="swiper-slide">
+                            <a href="# " className="cards-sm popular-categories__wrapper-item">
+                                <div className="cards-sm__img-wrapper">
+                                    <img src="assets/images/categories/lock.png" alt="img-01" />
+                                </div>
+                                <h5 className="font-body--xl-500">Lock</h5>
+                            </a>
+                        </div>
+
+                        <div className="swiper-slide">
+                            <a href="# " className="cards-sm popular-categories__wrapper-item">
+                                <div className="cards-sm__img-wrapper">
+                                    <img src="assets/images/categories/door.png" alt="img-01" />
+                                </div>
+                                <h5 className="font-body--xl-500">Door Fiting</h5>
+                            </a>
+                        </div>
+
+                        <div className="swiper-slide">
+                            <a href="# " className="cards-sm popular-categories__wrapper-item">
+                                <div className="cards-sm__img-wrapper">
+                                    <img src="assets/images/categories/hang.png" alt="img-01" />
+                                </div>
+                                <h5 className="font-body--xl-500">Hangers</h5>
+                            </a>
+                        </div>
+
+                        <div className="swiper-slide">
+                            <a href="# " className="cards-sm popular-categories__wrapper-item">
+                                <div className="cards-sm__img-wrapper">
+                                    <img src="assets/images/categories/fastners.png" alt="img-01" />
+                                </div>
+                                <h5 className="font-body--xl-500">Fastners</h5>
+                            </a>
+                        </div>
+
+                        <div className="swiper-slide">
+                            <a href="# " className="cards-sm popular-categories__wrapper-item">
+                                <div className="cards-sm__img-wrapper">
+                                    <img src="assets/images/categories/nuts.png" alt="img-01" />
+                                </div>
+                                <h5 className="font-body--xl-500">Nuts</h5>
+                            </a>
+                        </div>
+
+                        <div className="swiper-slide">
+                            <a href="# " className="cards-sm popular-categories__wrapper-item">
+                                <div className="cards-sm__img-wrapper">
+                                    <img src="assets/images/categories/hooks.png" alt="img-01" />
+                                </div>
+                                <h5 className="font-body--xl-500">Hooks</h5>
+                            </a>
+                        </div>
+
+                        <div className="swiper-slide">
+                            <a href="# " className="cards-sm popular-categories__wrapper-item">
+                                <div className="cards-sm__img-wrapper">
+                                    <img src="assets/images/categories/glass.png" alt="img-01" />
+                                </div>
+                                <h5 className="font-body--xl-500">Glass Fiting</h5>
+                            </a>
+                        </div>
+
+                        <div className="swiper-slide">
+                            <a href="# " className="cards-sm popular-categories__wrapper-item">
+                                <div className="cards-sm__img-wrapper">
+                                    <img src="assets/images/categories/hand.png" alt="img-01" />
+                                </div>
+                                <h5 className="font-body--xl-500">Handles</h5>
+                            </a>
+                        </div>
+
+                        <div className="swiper-slide">
+                            <a href="# " className="cards-sm popular-categories__wrapper-item">
+                                <div className="cards-sm__img-wrapper">
+                                    <img src="assets/images/categories/screws.png" alt="img-01" />
+                                </div>
+                                <h5 className="font-body--xl-500">Screws</h5>
+                            </a>
+                        </div>
+
+                        <div className="swiper-slide">
+                            <a href="# " className="cards-sm popular-categories__wrapper-item">
+                                <div className="cards-sm__img-wrapper">
+                                    <img src="assets/images/categories/caster.png" alt="img-01" />
+                                </div>
+                                <h5 className="font-body--xl-500">Caster Wheels</h5>
+                            </a>
+                        </div>
+
+                        <div className="swiper-slide">
+                            <a href="# " className="cards-sm popular-categories__wrapper-item">
+                                <div className="cards-sm__img-wrapper">
+                                    <img src="assets/images/categories/pipe.png" alt="img-01" />
+                                </div>
+                                <h5 className="font-body--xl-500">Pipe fiting</h5>
+                            </a>
+                        </div>
+                    </div>
+                    <div className="swiper-pagination"></div>
+                </div>
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+            </div>
+        </section>
+      
+        <section className="popular-products section section--md">
+            <div className="container">
+                <div className="section__head">
+                    <h2 className="section--title-one font-title--sm">Our products</h2>
+                    <a href="shop-01.html">
+                        View All
+                        <span>
+                             <i className="fa fa-arrow-right fa-1x"></i>
+                        </span>
+                    </a>
+                </div>
+
+                <div className="popular-products__wrapper">
+                    <div className="cards-md">
+                        <div className="cards-md__img-wrapper">
+                            <a href="product-details.html">
+                                <img src="assets/images/products/img-02.png" alt="products" />
+                            </a>
+                            <span className="tag danger font-body--md-400">sale 50%</span>
+                            <div className="cards-md__favs-list">
+                                <span className="action-btn">
+                                     <i className="fa fa-heart"></i>
+                                </span>
+                                <span className="action-btn" data-bs-toggle="modal" data-bs-target="#productView">
+                                    <i className="fa fa-eye"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div className="cards-md__info d-flex justify-content-between align-items-center">
+                            <a href="product-details.html" className="cards-md__info-left">
+                                <h6 className="font-body--md-400">test</h6>
+                                <div className="cards-md__info-price">
+                                    <span className="font-body--lg-500">$14.99</span>
+                                    <del className="font-body--lg-400">$14.99</del>
+                                </div>
+                                <ul className="cards-md__info-rating d-flex">
+                                    <li>
+                                        <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-smalls"></i>
+                                    </li>
+                                </ul>
+                            </a>
+                            <div className="cards-md__info-right text-center">
+                                <p className="text-black">Add to Cart</p>
+                                <span className="action-btn">
+                                    <i className="fa fa-shopping-bag bags"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="cards-md">
+                        <div className="cards-md__img-wrapper">
+                            <a href="product-details.html">
+                                <img src="assets/images/products/img-01.png" alt="products" />
+                            </a>
+                            
+                            <div className="cards-md__favs-list">
+                                <span className="action-btn">
+                                     <i className="fa fa-heart"></i>
+                                </span>
+                                <span className="action-btn" data-bs-toggle="modal" data-bs-target="#productView">
+                                    <i className="fa fa-eye"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div className="cards-md__info d-flex justify-content-between align-items-center">
+                            <a href="product-details.html" className="cards-md__info-left">
+                                <h6 className="font-body--md-400">Dummy</h6>
+                                <div className="cards-md__info-price">
+                                    <span className="font-body--lg-500">$14.99</span>
+                                    <del className="font-body--lg-400">$14.99</del>
+                                </div>
+                                <ul className="cards-md__info-rating d-flex">
+                                    <li>
+                                        <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-smalls"></i>
+                                    </li>
+                                </ul>
+                            </a>
+                            <div className="cards-md__info-right text-center">
+                                <p className="text-black">Add to Cart</p>
+                                <span className="action-btn">
+                                    <i className="fa fa-shopping-bag bags"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="cards-md">
+                        <div className="cards-md__img-wrapper">
+                            <a href="product-details.html">
+                                <img src="assets/images/products/img-03.png" alt="products" />
+                            </a>
+                            
+                             <div className="cards-md__favs-list">
+                                <span className="action-btn">
+                                     <i className="fa fa-heart"></i>
+                                </span>
+                                <span className="action-btn" data-bs-toggle="modal" data-bs-target="#productView">
+                                    <i className="fa fa-eye"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div className="cards-md__info d-flex justify-content-between align-items-center">
+                            <a href="product-details.html" className="cards-md__info-left">
+                                <h6 className="font-body--md-400">Dummy</h6>
+                                <div className="cards-md__info-price">
+                                    <span className="font-body--lg-500">$14.99</span>
+                                    <del className="font-body--lg-400">$14.99</del>
+                                </div>
+                                <ul className="cards-md__info-rating d-flex">
+                                    <li>
+                                        <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-smalls"></i>
+                                    </li>
+                                </ul>
+                            </a>
+                            <div className="cards-md__info-right text-center">
+                                <p className="text-black">Add to Cart</p>
+                                <span className="action-btn">
+                                    <i className="fa fa-shopping-bag bags"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="cards-md">
+                        <div className="cards-md__img-wrapper">
+                            <a href="product-details.html">
+                                <img src="assets/images/products/img-04.png" alt="products" />
+                            </a>
+                            
+                             <div className="cards-md__favs-list">
+                                <span className="action-btn">
+                                     <i className="fa fa-heart"></i>
+                                </span>
+                                <span className="action-btn" data-bs-toggle="modal" data-bs-target="#productView">
+                                    <i className="fa fa-eye"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div className="cards-md__info d-flex justify-content-between align-items-center">
+                            <a href="product-details.html" className="cards-md__info-left">
+                                <h6 className="font-body--md-400">Dummy</h6>
+                                <div className="cards-md__info-price">
+                                    <span className="font-body--lg-500">$14.99</span>
+                                    <del className="font-body--lg-400">$14.99</del>
+                                </div>
+                                <ul className="cards-md__info-rating d-flex">
+                                    <li>
+                                        <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-smalls"></i>
+                                    </li>
+                                </ul>
+                            </a>
+                            <div className="cards-md__info-right text-center">
+                                <p className="text-black">Add to Cart</p>
+                                <span className="action-btn">
+                                    <i className="fa fa-shopping-bag bags"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="cards-md">
+                        <div className="cards-md__img-wrapper">
+                            <a href="product-details.html">
+                                <img src="assets/images/products/img-05.png" alt="products" />
+                            </a>
+                            
+                             <div className="cards-md__favs-list">
+                                <span className="action-btn">
+                                     <i className="fa fa-heart"></i>
+                                </span>
+                                <span className="action-btn" data-bs-toggle="modal" data-bs-target="#productView">
+                                    <i className="fa fa-eye"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div className="cards-md__info d-flex justify-content-between align-items-center">
+                            <a href="product-details.html" className="cards-md__info-left">
+                                <h6 className="font-body--md-400">Dummy</h6>
+                                <div className="cards-md__info-price">
+                                    <span className="font-body--lg-500">$14.99</span>
+                                    <del className="font-body--lg-400">$14.99</del>
+                                </div>
+                                <ul className="cards-md__info-rating d-flex">
+                                    <li>
+                                        <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-smalls"></i>
+                                    </li>
+                                </ul>
+                            </a>
+                             <div className="cards-md__info-right text-center">
+                                <p className="text-black">Add to Cart</p>
+                                <span className="action-btn">
+                                    <i className="fa fa-shopping-bag bags"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="cards-md">
+                        <div className="cards-md__img-wrapper">
+                            <a href="product-details.html">
+                                <img src="assets/images/products/img-06.png" alt="products" />
+                            </a>
+                            
+                            <div className="cards-md__favs-list">
+                                <span className="action-btn">
+                                     <i className="fa fa-heart"></i>
+                                </span>
+                                <span className="action-btn" data-bs-toggle="modal" data-bs-target="#productView">
+                                    <i className="fa fa-eye"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div className="cards-md__info d-flex justify-content-between align-items-center">
+                            <a href="product-details.html" className="cards-md__info-left">
+                                <h6 className="font-body--md-400">Dummy</h6>
+                                <div className="cards-md__info-price">
+                                    <span className="font-body--lg-500">$14.99</span>
+                                    <del className="font-body--lg-400">$14.99</del>
+                                </div>
+                                <ul className="cards-md__info-rating d-flex">
+                                    <li>
+                                        <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-smalls"></i>
+                                    </li>
+                                </ul>
+                            </a>
+                             <div className="cards-md__info-right text-center">
+                                <p className="text-black">Add to Cart</p>
+                                <span className="action-btn">
+                                    <i className="fa fa-shopping-bag bags"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="cards-md">
+                        <div className="cards-md__img-wrapper">
+                            <a href="product-details.html">
+                                <img src="assets/images/products/img-07.png" alt="products" />
+                            </a>
+                            
+                             <div className="cards-md__favs-list">
+                                <span className="action-btn">
+                                     <i className="fa fa-heart"></i>
+                                </span>
+                                <span className="action-btn" data-bs-toggle="modal" data-bs-target="#productView">
+                                    <i className="fa fa-eye"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div className="cards-md__info d-flex justify-content-between align-items-center">
+                            <a href="product-details.html" className="cards-md__info-left">
+                                <h6 className="font-body--md-400">Dummy</h6>
+                                <div className="cards-md__info-price">
+                                    <span className="font-body--lg-500">$14.99</span>
+                                    <del className="font-body--lg-400">$14.99</del>
+                                </div>
+                                <ul className="cards-md__info-rating d-flex">
+                                    <li>
+                                        <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-smalls"></i>
+                                    </li>
+                                </ul>
+                            </a>
+                            <div className="cards-md__info-right text-center">
+                                <p className="text-black">Add to Cart</p>
+                                <span className="action-btn">
+                                    <i className="fa fa-shopping-bag bags"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="cards-md">
+                        <div className="cards-md__img-wrapper">
+                            <a href="product-details.html">
+                                <img src="assets/images/products/img-08.png" alt="products" />
+                            </a>
+                            
+                             <div className="cards-md__favs-list">
+                                <span className="action-btn">
+                                     <i className="fa fa-heart"></i>
+                                </span>
+                                <span className="action-btn" data-bs-toggle="modal" data-bs-target="#productView">
+                                    <i className="fa fa-eye"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div className="cards-md__info d-flex justify-content-between align-items-center">
+                            <a href="product-details-2.html" className="cards-md__info-left">
+                                <h6 className="font-body--md-400">Dummy</h6>
+                                <div className="cards-md__info-price">
+                                    <span className="font-body--lg-500">$14.99</span>
+                                    <del className="font-body--lg-400">$14.99</del>
+                                </div>
+                                <ul className="cards-md__info-rating d-flex">
+                                    <li>
+                                        <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-smalls"></i>
+                                    </li>
+                                </ul>
+                            </a>
+                            <div className="cards-md__info-right text-center">
+                                <p className="text-black">Add to Cart</p>
+                                <span className="action-btn">
+                                    <i className="fa fa-shopping-bag bags"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="cards-md">
+                        <div className="cards-md__img-wrapper">
+                            <a href="product-details.html">
+                                <img src="assets/images/products/img-09.png" alt="products" />
+                            </a>
+                            
+                             <div className="cards-md__favs-list">
+                                <span className="action-btn">
+                                     <i className="fa fa-heart"></i>
+                                </span>
+                                <span className="action-btn" data-bs-toggle="modal" data-bs-target="#productView">
+                                    <i className="fa fa-eye"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div className="cards-md__info d-flex justify-content-between align-items-center">
+                            <a href="product-details-2.html" className="cards-md__info-left">
+                                <h6 className="font-body--md-400">Dummy</h6>
+                                <div className="cards-md__info-price">
+                                    <span className="font-body--lg-500">$14.99</span>
+                                    <del className="font-body--lg-400">$14.99</del>
+                                </div>
+                                <ul className="cards-md__info-rating d-flex">
+                                    <li>
+                                        <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-smalls"></i>
+                                    </li>
+                                </ul>
+                            </a>
+                            <div className="cards-md__info-right text-center">
+                                <p className="text-black">Add to Cart</p>
+                                <span className="action-btn">
+                                    <i className="fa fa-shopping-bag bags"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="cards-md">
+                        <div className="cards-md__img-wrapper">
+                            <a href="product-details.html">
+                                <img src="assets/images/products/img-10.png" alt="products" />
+                            </a>
+                            
+                            <div className="cards-md__favs-list">
+                                <span className="action-btn">
+                                     <i className="fa fa-heart"></i>
+                                </span>
+                                <span className="action-btn" data-bs-toggle="modal" data-bs-target="#productView">
+                                    <i className="fa fa-eye"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div className="cards-md__info d-flex justify-content-between align-items-center">
+                            <a href="product-details-2.html" className="cards-md__info-left">
+                                <h6 className="font-body--md-400">Dummy</h6>
+                                <div className="cards-md__info-price">
+                                    <span className="font-body--lg-500">$14.99</span>
+                                    <del className="font-body--lg-400">$14.99</del>
+                                </div>
+                                <ul className="cards-md__info-rating d-flex">
+                                    <li>
+                                        <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-smalls"></i>
+                                    </li>
+                                </ul>
+                            </a>
+                            <div className="cards-md__info-right text-center">
+                                <p className="text-black">Add to Cart</p>
+                                <span className="action-btn">
+                                    <i className="fa fa-shopping-bag bags"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="swiper-container popular-products--slider">
+                    <div className="swiper-wrapper">
+                        <div className="swiper-slide">
+                            <div className="cards-md w-100">
+                                <div className="cards-md__img-wrapper">
+                                    <a href="product-details.html">
+                                        <img src="assets/images/products/img-02.png" alt="products" />
+                                    </a>
+                                    <span className="tag danger font-body--md-400">sale 50%</span>
+                                     <div className="cards-md__favs-list">
+                                <span className="action-btn">
+                                     <i className="fa fa-heart"></i>
+                                </span>
+                                <span className="action-btn" data-bs-toggle="modal" data-bs-target="#productView">
+                                    <i className="fa fa-eye"></i>
+                                </span>
+                            </div>
+                                </div>
+                                <div className="cards-md__info d-flex justify-content-between align-items-center">
+                                    <a href="product-details.html" className="cards-md__info-left">
+                                        <h6 className="font-body--md-400">Dummy</h6>
+                                        <div className="cards-md__info-price">
+                                            <span className="font-body--lg-500">$14.99</span>
+                                            <del className="font-body--lg-400">$14.99</del>
+                                        </div>
+                                        <ul className="cards-md__info-rating d-flex">
+                                    <li>
+                                        <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-smalls"></i>
+                                    </li>
+                                </ul>
+                                    </a>
+                                   <div className="cards-md__info-right text-center">
+                                <p className="text-black">Add to Cart</p>
+                                <span className="action-btn">
+                                    <i className="fa fa-shopping-bag bags"></i>
+                                </span>
+                            </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="swiper-slide">
+                            <div className="cards-md w-100">
+                                <div className="cards-md__img-wrapper">
+                                    <a href="product-details.html">
+                                        <img src="assets/images/products/img-01.png" alt="products" />
+                                    </a>
+                                    
+                                     <div className="cards-md__favs-list">
+                                <span className="action-btn">
+                                     <i className="fa fa-heart"></i>
+                                </span>
+                                <span className="action-btn" data-bs-toggle="modal" data-bs-target="#productView">
+                                    <i className="fa fa-eye"></i>
+                                </span>
+                            </div>
+                                </div>
+                                <div className="cards-md__info d-flex justify-content-between align-items-center">
+                                    <a href="product-details.html" className="cards-md__info-left">
+                                        <h6 className="font-body--md-400">Dummy</h6>
+                                        <div className="cards-md__info-price">
+                                            <span className="font-body--lg-500">$14.99</span>
+                                            <del className="font-body--lg-400">$14.99</del>
+                                        </div>
+                                        <ul className="cards-md__info-rating d-flex">
+                                    <li>
+                                        <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-smalls"></i>
+                                    </li>
+                                </ul>
+                                    </a>
+                                   <div className="cards-md__info-right text-center">
+                                <p className="text-black">Add to Cart</p>
+                                <span className="action-btn">
+                                    <i className="fa fa-shopping-bag bags"></i>
+                                </span>
+                            </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="swiper-slide">
+                            <div className="cards-md w-100">
+                                <div className="cards-md__img-wrapper">
+                                    <a href="product-details.html">
+                                        <img src="assets/images/products/img-03.png" alt="products" />
+                                    </a>
+                                    
+                                     <div className="cards-md__favs-list">
+                                <span className="action-btn">
+                                     <i className="fa fa-heart"></i>
+                                </span>
+                                <span className="action-btn" data-bs-toggle="modal" data-bs-target="#productView">
+                                    <i className="fa fa-eye"></i>
+                                </span>
+                            </div>
+                                </div>
+                                <div className="cards-md__info d-flex justify-content-between align-items-center">
+                                    <a href="product-details.html" className="cards-md__info-left">
+                                        <h6 className="font-body--md-400">Dummy</h6>
+                                        <div className="cards-md__info-price">
+                                            <span className="font-body--lg-500">$14.99</span>
+                                            <del className="font-body--lg-400">$14.99</del>
+                                        </div>
+                                        <ul className="cards-md__info-rating d-flex">
+                                    <li>
+                                        <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-smalls"></i>
+                                    </li>
+                                </ul>
+                                    </a>
+                                   <div className="cards-md__info-right text-center">
+                                <p className="text-black">Add to Cart</p>
+                                <span className="action-btn">
+                                    <i className="fa fa-shopping-bag bags"></i>
+                                </span>
+                            </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="swiper-slide">
+                            <div className="cards-md w-100">
+                                <div className="cards-md__img-wrapper">
+                                    <a href="product-details.html">
+                                        <img src="assets/images/products/img-04.png" alt="products" />
+                                    </a>
+                                    
+                                     <div className="cards-md__favs-list">
+                                <span className="action-btn">
+                                     <i className="fa fa-heart"></i>
+                                </span>
+                                <span className="action-btn" data-bs-toggle="modal" data-bs-target="#productView">
+                                    <i className="fa fa-eye"></i>
+                                </span>
+                            </div>
+                                </div>
+                                <div className="cards-md__info d-flex justify-content-between align-items-center">
+                                    <a href="product-details.html" className="cards-md__info-left">
+                                        <h6 className="font-body--md-400">Dummy</h6>
+                                        <div className="cards-md__info-price">
+                                            <span className="font-body--lg-500">$14.99</span>
+                                            <del className="font-body--lg-400">$14.99</del>
+                                        </div>
+                                        <ul className="cards-md__info-rating d-flex">
+                                    <li>
+                                        <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-smalls"></i>
+                                    </li>
+                                </ul>
+                                    </a>
+                                    <div className="cards-md__info-right text-center">
+                                <p className="text-black">Add to Cart</p>
+                                <span className="action-btn">
+                                    <i className="fa fa-shopping-bag bags"></i>
+                                </span>
+                            </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="swiper-slide">
+                            <div className="cards-md w-100">
+                                <div className="cards-md__img-wrapper">
+                                    <a href="product-details.html">
+                                        <img src="assets/images/products/img-05.png" alt="products" />
+                                    </a>
+                                    
+                                     <div className="cards-md__favs-list">
+                                <span className="action-btn">
+                                     <i className="fa fa-heart"></i>
+                                </span>
+                                <span className="action-btn" data-bs-toggle="modal" data-bs-target="#productView">
+                                    <i className="fa fa-eye"></i>
+                                </span>
+                            </div>
+                                </div>
+                                <div className="cards-md__info d-flex justify-content-between align-items-center">
+                                    <a href="product-details.html" className="cards-md__info-left">
+                                        <h6 className="font-body--md-400">Dummy</h6>
+                                        <div className="cards-md__info-price">
+                                            <span className="font-body--lg-500">$14.99</span>
+                                            <del className="font-body--lg-400">$14.99</del>
+                                        </div>
+                                       <ul className="cards-md__info-rating d-flex">
+                                    <li>
+                                        <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-smalls"></i>
+                                    </li>
+                                </ul>
+                                    </a>
+                                    <div className="cards-md__info-right text-center">
+                                <p className="text-black">Add to Cart</p>
+                                <span className="action-btn">
+                                    <i className="fa fa-shopping-bag bags"></i>
+                                </span>
+                            </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="swiper-slide">
+                            <div className="cards-md w-100">
+                                <div className="cards-md__img-wrapper">
+                                    <a href="product-details.html">
+                                        <img src="assets/images/products/img-06.png" alt="products" />
+                                    </a>
+                                    
+                                     <div className="cards-md__favs-list">
+                                <span className="action-btn">
+                                     <i className="fa fa-heart"></i>
+                                </span>
+                                <span className="action-btn" data-bs-toggle="modal" data-bs-target="#productView">
+                                    <i className="fa fa-eye"></i>
+                                </span>
+                            </div>
+                                </div>
+                                <div className="cards-md__info d-flex justify-content-between align-items-center">
+                                    <a href="product-details.html" className="cards-md__info-left">
+                                        <h6 className="font-body--md-400">Dummy</h6>
+                                        <div className="cards-md__info-price">
+                                            <span className="font-body--lg-500">$14.99</span>
+                                            <del className="font-body--lg-400">$14.99</del>
+                                        </div>
+                                        <ul className="cards-md__info-rating d-flex">
+                                    <li>
+                                        <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-smalls"></i>
+                                    </li>
+                                </ul>
+                                    </a>
+                                    <div className="cards-md__info-right text-center">
+                                <p className="text-black">Add to Cart</p>
+                                <span className="action-btn">
+                                    <i className="fa fa-shopping-bag bags"></i>
+                                </span>
+                            </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="swiper-pagination"></div>
+                </div>
+            </div>
+        </section>
+     
+        <section className="cyclone section section--lg">
+            <div className="container">
+                <div className="row">
+                    <div className="col-xl-4 col-md-6">
+                        <div className="cards-ss cards-ss--lg">
+                            <div className="cards-ss__img-wrapper">
+                                <img src="assets/images/banner/banner-sm-03.png" alt="banner" />
+                                <div className="cards-ss__content text-center">
+                                    <h6 className="font-body--md-500">BEST DEALS</h6>
+                                    <h2 className="font-title--lg">Door Locks</h2>
+
+                                    <div id="countdownTwo" className="countdown-clock"></div>
+
+                                    <a href="#" className="button button--md">
+                                        Shop now
+                                        <span>
+                                            <i className="fa fa-arrow-right"></i>
+                                        </span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="col-xl-4 col-md-6">
+                        <div className="cards-ss cards-ss--lg">
+                            <div className="cards-ss__img-wrapper">
+                                <img src="assets/images/banner/banner-sm-01.png" alt="banner" />
+                                <div className="cards-ss__content text-center">
+                                    <h6 className="font-body--md-500">85% Fat Free</h6>
+                                    <h2 className="font-title--lg">Caster Wheels</h2>
+                                    <div className="cards-ss__startpackage">
+                                        <p>Started at <span className="font-body--xxl-600">$79.99</span></p>
+                                    </div>
+                                    <a href="#" className="button button--md">
+                                        Shop now
+                                        <span>
+                                            <i className="fa fa-arrow-right"></i>
+                                        </span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="col-xl-4 col-md-6">
+                        <div className="cards-ss cards-ss--lg">
+                            <div className="cards-ss__img-wrapper">
+                                <img src="assets/images/banner/banner-sm-02.png" alt="banner" />
+                                <div className="cards-ss__content text-center">
+                                    <h6 className="font-body--md-500">Summer Sale</h6>
+                                    <h2 className="font-title--lg">Fastners Nuts</h2>
+
+                                    <div className="cards-ss__saleoff">
+                                        <p>Up to <span>64% off</span></p>
+                                    </div>
+
+                                    <a href="#" className="button button--md">
+                                        Shop now
+                                        <span>
+                                           <i className="fa fa-arrow-right"></i>
+                                        </span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section className="deals section--gray section--lg">
+            <div className="container">
+                <div className="section__head">
+                    <h2 className="section--title-one font-title--sm">Hot Deals</h2>
+                    <a href="shop-01.html">
+                        View All
+                        <span>
+                            <i className="fa fa-arrow-right"></i>
+                        </span>
+                    </a>
+                </div>
+
+                <div className="deals-products__wrapper">
+                    <div className="cards-lg deals-products__wrapper-item deals-products__wrapper-item--one">
+                        <div className="cards-lg__img-wrapper">
+                            <img src="assets/images/products/img-12.png" alt="products" />
+                            <div className="tag-group">
+                                <span className="tag danger">Sale 50%</span>
+                                <span className="tag blue">Best Sale</span>
+                            </div>
+                            <form action="#">
+                                <div className="cards-lg__group-action">
+                                    <button className="action-btn">
+                                       <i className="fa fa-heart"></i>
+                                    </button>
+                                    <button className="button button--md w-75">
+                                        Add to cart
+                                        <span>
+                                            <i className="fa fa-shopping-bag bagss"></i>
+                                        </span>
+                                    </button>
+                                    <button className="action-btn" data-bs-toggle="modal" data-bs-target="#productView">
+                                        <i className="fa fa-eye"></i>
+                                    </button>
+                                </div>
+                                 <div className="cards-md__favs-list">
+                                <span className="action-btn">
+                                     <i className="fa fa-heart"></i>
+                                </span>
+                                <span className="action-btn" data-bs-toggle="modal" data-bs-target="#productView">
+                                    <i className="fa fa-eye"></i>
+                                </span>
+                            </div>
+                            </form>
+                        </div>
+                        <div className="cards-lg__info text-center">
+                            <h6 className="font-body--xl-400">Dummy</h6>
+                            <div className="cards-lg__info-price">
+                                <span className="font-body--xxxl-500">$14.99</span>
+                                <del className="font-body--xxxl-400">$14.99</del>
+                            </div>
+                            <ul className="cards-md__info-rating d-flex justify-content-center">
+                                    <li>
+                                        <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-smalls"></i>
+                                    </li>
+                                </ul>
+                            <div className="cards-lg__info-countdown">
+                                <h6 className="font-body--md-400">Hurry up! Offer ends In:</h6>
+                                <div id="countdownOne" className="info-countdown__card"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="cards-md deals-products__wrapper-item deals-products__wrapper-item--two">
+                        <div className="cards-md__img-wrapper">
+                            <a href="product-details.html">
+                                <img src="assets/images/products/img-02.png" alt="products" />
+                            </a>
+                            <span className="tag danger font-body--md-400">sale 50%</span>
+                             <div className="cards-md__favs-list">
+                                <span className="action-btn">
+                                     <i className="fa fa-heart"></i>
+                                </span>
+                                <span className="action-btn" data-bs-toggle="modal" data-bs-target="#productView">
+                                    <i className="fa fa-eye"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div className="cards-md__info d-flex justify-content-between align-items-center">
+                            <a href="product-details.html" className="cards-md__info-left">
+                                <h6 className="font-body--md-400">Dummy</h6>
+                                <div className="cards-md__info-price">
+                                    <span className="font-body--lg-500">$14.99</span>
+                                    <del className="font-body--lg-400">$14.99</del>
+                                </div>
+                                <ul className="cards-md__info-rating d-flex">
+                                    <li>
+                                        <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-smalls"></i>
+                                    </li>
+                                </ul>
+                            </a>
+                            <div className="cards-md__info-right text-center">
+                                <p className="text-black">Add to Cart</p>
+                                <span className="action-btn">
+                                    <i className="fa fa-shopping-bag bags"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="cards-md deals-products__wrapper-item deals-products__wrapper-item--three">
+                        <div className="cards-md__img-wrapper">
+                            <a href="product-details.html">
+                                <img src="assets/images/products/img-03.png" alt="products" />
+                            </a>
+                            
+                             <div className="cards-md__favs-list">
+                                <span className="action-btn">
+                                     <i className="fa fa-heart"></i>
+                                </span>
+                                <span className="action-btn" data-bs-toggle="modal" data-bs-target="#productView">
+                                    <i className="fa fa-eye"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div className="cards-md__info d-flex justify-content-between align-items-center">
+                            <a href="product-details.html" className="cards-md__info-left">
+                                <h6 className="font-body--md-400">Dummy</h6>
+                                <div className="cards-md__info-price">
+                                    <span className="font-body--lg-500">$14.99</span>
+                                    <del className="font-body--lg-400">$14.99</del>
+                                </div>
+                               <ul className="cards-md__info-rating d-flex">
+                                    <li>
+                                        <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-smalls"></i>
+                                    </li>
+                                </ul>
+                            </a>
+                           <div className="cards-md__info-right text-center">
+                                <p className="text-black">Add to Cart</p>
+                                <span className="action-btn">
+                                    <i className="fa fa-shopping-bag bags"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="cards-md deals-products__wrapper-item deals-products__wrapper-item--four">
+                        <div className="cards-md__img-wrapper">
+                            <a href="product-details.html">
+                                <img src="assets/images/products/img-04.png" alt="products" />
+                            </a>
+                            
+                             <div className="cards-md__favs-list">
+                                <span className="action-btn">
+                                     <i className="fa fa-heart"></i>
+                                </span>
+                                <span className="action-btn" data-bs-toggle="modal" data-bs-target="#productView">
+                                    <i className="fa fa-eye"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div className="cards-md__info d-flex justify-content-between align-items-center">
+                            <a href="product-details.html" className="cards-md__info-left">
+                                <h6 className="font-body--md-400">Dummy</h6>
+                                <div className="cards-md__info-price">
+                                    <span className="font-body--lg-500">$14.99</span>
+                                    <del className="font-body--lg-400">$14.99</del>
+                                </div>
+                                <ul className="cards-md__info-rating d-flex">
+                                    <li>
+                                        <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-smalls"></i>
+                                    </li>
+                                </ul>
+                            </a>
+                            <div className="cards-md__info-right text-center">
+                                <p className="text-black">Add to Cart</p>
+                                <span className="action-btn">
+                                    <i className="fa fa-shopping-bag bags"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="cards-md deals-products__wrapper-item deals-products__wrapper-item--five">
+                        <div className="cards-md__img-wrapper">
+                            <a href="product-details.html">
+                                <img src="assets/images/products/img-05.png" alt="products" />
+                            </a>
+                            
+                             <div className="cards-md__favs-list">
+                                <span className="action-btn">
+                                     <i className="fa fa-heart"></i>
+                                </span>
+                                <span className="action-btn" data-bs-toggle="modal" data-bs-target="#productView">
+                                    <i className="fa fa-eye"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div className="cards-md__info d-flex justify-content-between align-items-center">
+                            <a href="product-details.html" className="cards-md__info-left">
+                                <h6 className="font-body--md-400">Dummy</h6>
+                                <div className="cards-md__info-price">
+                                    <span className="font-body--lg-500">$14.99</span>
+                                    <del className="font-body--lg-400">$14.99</del>
+                                </div>
+                                <ul className="cards-md__info-rating d-flex">
+                                    <li>
+                                        <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-smalls"></i>
+                                    </li>
+                                </ul>
+                            </a>
+                            <div className="cards-md__info-right text-center">
+                                <p className="text-black">Add to Cart</p>
+                                <span className="action-btn">
+                                    <i className="fa fa-shopping-bag bags"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="cards-md deals-products__wrapper-item deals-products__wrapper-item--six">
+                        <div className="cards-md__img-wrapper">
+                            <a href="product-details.html">
+                                <img src="assets/images/products/img-06.png" alt="products" />
+                            </a>
+                            
+                             <div className="cards-md__favs-list">
+                                <span className="action-btn">
+                                     <i className="fa fa-heart"></i>
+                                </span>
+                                <span className="action-btn" data-bs-toggle="modal" data-bs-target="#productView">
+                                    <i className="fa fa-eye"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div className="cards-md__info d-flex justify-content-between align-items-center">
+                            <a href="product-details.html" className="cards-md__info-left">
+                                <h6 className="font-body--md-400">Dummy</h6>
+                                <div className="cards-md__info-price">
+                                    <span className="font-body--lg-500">$14.99</span>
+                                    <del className="font-body--lg-400">$14.99</del>
+                                </div>
+                                <ul className="cards-md__info-rating d-flex">
+                                    <li>
+                                        <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-smalls"></i>
+                                    </li>
+                                </ul>
+                            </a>
+                            <div className="cards-md__info-right text-center">
+                                <p className="text-black">Add to Cart</p>
+                                <span className="action-btn">
+                                    <i className="fa fa-shopping-bag bags"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="cards-md deals-products__wrapper-item deals-products__wrapper-item--seven">
+                        <div className="cards-md__img-wrapper">
+                            <a href="product-details.html">
+                                <img src="assets/images/products/img-07.png" alt="products" />
+                            </a>
+                            
+                             <div className="cards-md__favs-list">
+                                <span className="action-btn">
+                                     <i className="fa fa-heart"></i>
+                                </span>
+                                <span className="action-btn" data-bs-toggle="modal" data-bs-target="#productView">
+                                    <i className="fa fa-eye"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div className="cards-md__info d-flex justify-content-between align-items-center">
+                            <a href="product-details.html" className="cards-md__info-left">
+                                <h6 className="font-body--md-400">Dummy</h6>
+                                <div className="cards-md__info-price">
+                                    <span className="font-body--lg-500">$14.99</span>
+                                    <del className="font-body--lg-400">$14.99</del>
+                                </div>
+                                <ul className="cards-md__info-rating d-flex">
+                                    <li>
+                                        <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-smalls"></i>
+                                    </li>
+                                </ul>
+                            </a>
+                            <div className="cards-md__info-right text-center">
+                                <p className="text-black">Add to Cart</p>
+                                <span className="action-btn">
+                                    <i className="fa fa-shopping-bag bags"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="cards-md deals-products__wrapper-item deals-products__wrapper-item--eight">
+                        <div className="cards-md__img-wrapper">
+                            <a href="product-details.html">
+                                <img src="assets/images/products/img-08.png" alt="products" />
+                            </a>
+                            
+                             <div className="cards-md__favs-list">
+                                <span className="action-btn">
+                                     <i className="fa fa-heart"></i>
+                                </span>
+                                <span className="action-btn" data-bs-toggle="modal" data-bs-target="#productView">
+                                    <i className="fa fa-eye"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div className="cards-md__info d-flex justify-content-between align-items-center">
+                            <a href="product-details-2.html" className="cards-md__info-left">
+                                <h6 className="font-body--md-400">Dummy</h6>
+                                <div className="cards-md__info-price">
+                                    <span className="font-body--lg-500">$14.99</span>
+                                    <del className="font-body--lg-400">$14.99</del>
+                                </div>
+                                <ul className="cards-md__info-rating d-flex">
+                                    <li>
+                                        <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-smalls"></i>
+                                    </li>
+                                </ul>
+                            </a>
+                            <div className="cards-md__info-right text-center">
+                                <p className="text-black">Add to Cart</p>
+                                <span className="action-btn">
+                                    <i className="fa fa-shopping-bag bags"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="cards-md deals-products__wrapper-item deals-products__wrapper-item--nine">
+                        <div className="cards-md__img-wrapper">
+                            <a href="product-details.html">
+                                <img src="assets/images/products/img-09.png" alt="products" />
+                            </a>
+                            
+                            <div className="cards-md__favs-list">
+                                <span className="action-btn">
+                                     <i className="fa fa-heart"></i>
+                                </span>
+                                <span className="action-btn" data-bs-toggle="modal" data-bs-target="#productView">
+                                    <i className="fa fa-eye"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div className="cards-md__info d-flex justify-content-between align-items-center">
+                            <a href="product-details-2.html" className="cards-md__info-left">
+                                <h6 className="font-body--md-400">Dummy</h6>
+                                <div className="cards-md__info-price">
+                                    <span className="font-body--lg-500">$14.99</span>
+                                    <del className="font-body--lg-400">$14.99</del>
+                                </div>
+                                <ul className="cards-md__info-rating d-flex">
+                                    <li>
+                                        <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-smalls"></i>
+                                    </li>
+                                </ul>
+                            </a>
+                            <div className="cards-md__info-right text-center">
+                                <p className="text-black">Add to Cart</p>
+                                <span className="action-btn">
+                                    <i className="fa fa-shopping-bag bags"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="cards-md deals-products__wrapper-item deals-products__wrapper-item--ten">
+                        <div className="cards-md__img-wrapper">
+                            <a href="product-details.html">
+                                <img src="assets/images/products/img-10.png" alt="products" />
+                            </a>
+                            
+                            <div className="cards-md__favs-list">
+                                <span className="action-btn">
+                                     <i className="fa fa-heart"></i>
+                                </span>
+                                <span className="action-btn" data-bs-toggle="modal" data-bs-target="#productView">
+                                    <i className="fa fa-eye"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div className="cards-md__info d-flex justify-content-between align-items-center">
+                            <a href="product-details-2.html" className="cards-md__info-left">
+                                <h6 className="font-body--md-400">Dummy</h6>
+                                <div className="cards-md__info-price">
+                                    <span className="font-body--lg-500">$14.99</span>
+                                    <del className="font-body--lg-400">$14.99</del>
+                                </div>
+                                <ul className="cards-md__info-rating d-flex">
+                                    <li>
+                                        <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-smalls"></i>
+                                    </li>
+                                </ul>
+                            </a>
+                            <div className="cards-md__info-right text-center">
+                                <p className="text-black">Add to Cart</p>
+                                <span className="action-btn">
+                                    <i className="fa fa-shopping-bag bags"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="cards-md deals-products__wrapper-item deals-products__wrapper-item--eleven">
+                        <div className="cards-md__img-wrapper">
+                            <a href="product-details.html">
+                                <img src="assets/images/products/img-11.png" alt="products" />
+                            </a>
+                            
+                             <div className="cards-md__favs-list">
+                                <span className="action-btn">
+                                     <i className="fa fa-heart"></i>
+                                </span>
+                                <span className="action-btn" data-bs-toggle="modal" data-bs-target="#productView">
+                                    <i className="fa fa-eye"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div className="cards-md__info d-flex justify-content-between align-items-center">
+                            <a href="product-details-2.html" className="cards-md__info-left">
+                                <h6 className="font-body--md-400">Dummy</h6>
+                                <div className="cards-md__info-price">
+                                    <span className="font-body--lg-500">$14.99</span>
+                                    <del className="font-body--lg-400">$14.99</del>
+                                </div>
+                                <ul className="cards-md__info-rating d-flex">
+                                    <li>
+                                        <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-smalls"></i>
+                                    </li>
+                                </ul>
+                            </a>
+                           <div className="cards-md__info-right text-center">
+                                <p className="text-black">Add to Cart</p>
+                                <span className="action-btn">
+                                    <i className="fa fa-shopping-bag bags"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="cards-md deals-products__wrapper-item deals-products__wrapper-item--twelve">
+                        <div className="cards-md__img-wrapper">
+                            <a href="product-details.html">
+                                <img src="assets/images/products/img-14.png" alt="products" />
+                            </a>
+                            
+                             <div className="cards-md__favs-list">
+                                <span className="action-btn">
+                                     <i className="fa fa-heart"></i>
+                                </span>
+                                <span className="action-btn" data-bs-toggle="modal" data-bs-target="#productView">
+                                    <i className="fa fa-eye"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div className="cards-md__info d-flex justify-content-between align-items-center">
+                            <a href="product-details-2.html" className="cards-md__info-left">
+                                <h6 className="font-body--md-400">Dummy</h6>
+                                <div className="cards-md__info-price">
+                                    <span className="font-body--lg-500">$14.99</span>
+                                    <del className="font-body--lg-400">$14.99</del>
+                                </div>
+                               <ul className="cards-md__info-rating d-flex">
+                                    <li>
+                                        <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-smalls"></i>
+                                    </li>
+                                </ul>
+                            </a>
+                            <div className="cards-md__info-right text-center">
+                                <p className="text-black">Add to Cart</p>
+                                <span className="action-btn">
+                                    <i className="fa fa-shopping-bag bags"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="swiper-container deals-products--slider">
+                    <div className="swiper-wrapper">
+                        <div className="swiper-slide">
+                            <div className="cards-md">
+                                <div className="cards-md__img-wrapper">
+                                    <a href="product-details.html">
+                                        <img src="assets/images/products/img-02.png" alt="products" />
+                                    </a>
+                                    <span className="tag danger font-body--md-400">sale 50%</span>
+                                    <div className="cards-md__favs-list">
+                                <span className="action-btn">
+                                     <i className="fa fa-heart"></i>
+                                </span>
+                                <span className="action-btn" data-bs-toggle="modal" data-bs-target="#productView">
+                                    <i className="fa fa-eye"></i>
+                                </span>
+                            </div>
+                                </div>
+                                <div className="cards-md__info d-flex justify-content-between align-items-center">
+                                    <a href="product-details.html" className="cards-md__info-left">
+                                        <h6 className="font-body--md-400">Dummy</h6>
+                                        <div className="cards-md__info-price">
+                                            <span className="font-body--lg-500">$14.99</span>
+                                            <del className="font-body--lg-400">$14.99</del>
+                                        </div>
+                                        <ul className="cards-md__info-rating d-flex">
+                                    <li>
+                                        <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-smalls"></i>
+                                    </li>
+                                </ul>
+                                    </a>
+                                    <div className="cards-md__info-right text-center">
+                                <p className="text-black">Add to Cart</p>
+                                <span className="action-btn">
+                                    <i className="fa fa-shopping-bag bags"></i>
+                                </span>
+                            </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="swiper-slide">
+                            <div className="cards-md">
+                                <div className="cards-md__img-wrapper">
+                                    <a href="product-details.html">
+                                        <img src="assets/images/products/img-01.png" alt="products" />
+                                    </a>
+                                    
+                                     <div className="cards-md__favs-list">
+                                <span className="action-btn">
+                                     <i className="fa fa-heart"></i>
+                                </span>
+                                <span className="action-btn" data-bs-toggle="modal" data-bs-target="#productView">
+                                    <i className="fa fa-eye"></i>
+                                </span>
+                            </div>
+                                </div>
+                                <div className="cards-md__info d-flex justify-content-between align-items-center">
+                                    <a href="product-details.html" className="cards-md__info-left">
+                                        <h6 className="font-body--md-400">Dummy</h6>
+                                        <div className="cards-md__info-price">
+                                            <span className="font-body--lg-500">$14.99</span>
+                                            <del className="font-body--lg-400">$14.99</del>
+                                        </div>
+                                        <ul className="cards-md__info-rating d-flex">
+                                    <li>
+                                        <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-smalls"></i>
+                                    </li>
+                                </ul>
+                                    </a>
+                                    <div className="cards-md__info-right text-center">
+                                <p className="text-black">Add to Cart</p>
+                                <span className="action-btn">
+                                    <i className="fa fa-shopping-bag bags"></i>
+                                </span>
+                            </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="swiper-slide">
+                            <div className="cards-md">
+                                <div className="cards-md__img-wrapper">
+                                    <a href="product-details.html">
+                                        <img src="assets/images/products/img-03.png" alt="products" />
+                                    </a>
+                                    
+                                     <div className="cards-md__favs-list">
+                                <span className="action-btn">
+                                     <i className="fa fa-heart"></i>
+                                </span>
+                                <span className="action-btn" data-bs-toggle="modal" data-bs-target="#productView">
+                                    <i className="fa fa-eye"></i>
+                                </span>
+                            </div>
+                                </div>
+                                <div className="cards-md__info d-flex justify-content-between align-items-center">
+                                    <a href="product-details.html" className="cards-md__info-left">
+                                        <h6 className="font-body--md-400">Dummy</h6>
+                                        <div className="cards-md__info-price">
+                                            <span className="font-body--lg-500">$14.99</span>
+                                            <del className="font-body--lg-400">$14.99</del>
+                                        </div>
+                                        <ul className="cards-md__info-rating d-flex">
+                                    <li>
+                                        <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-smalls"></i>
+                                    </li>
+                                </ul>
+                                    </a>
+                                    <div className="cards-md__info-right text-center">
+                                <p className="text-black">Add to Cart</p>
+                                <span className="action-btn">
+                                    <i className="fa fa-shopping-bag bags"></i>
+                                </span>
+                            </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="swiper-slide">
+                            <div className="cards-md">
+                                <div className="cards-md__img-wrapper">
+                                    <a href="product-details.html">
+                                        <img src="assets/images/products/img-04.png" alt="products" />
+                                    </a>
+                                    
+                                     <div className="cards-md__favs-list">
+                                <span className="action-btn">
+                                     <i className="fa fa-heart"></i>
+                                </span>
+                                <span className="action-btn" data-bs-toggle="modal" data-bs-target="#productView">
+                                    <i className="fa fa-eye"></i>
+                                </span>
+                            </div>
+                                </div>
+                                <div className="cards-md__info d-flex justify-content-between align-items-center">
+                                    <a href="product-details.html" className="cards-md__info-left">
+                                        <h6 className="font-body--md-400">Dummy</h6>
+                                        <div className="cards-md__info-price">
+                                            <span className="font-body--lg-500">$14.99</span>
+                                            <del className="font-body--lg-400">$14.99</del>
+                                        </div>
+                                       <ul className="cards-md__info-rating d-flex">
+                                    <li>
+                                        <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-smalls"></i>
+                                    </li>
+                                </ul>
+                                    </a>
+                                    <div className="cards-md__info-right text-center">
+                                <p className="text-black">Add to Cart</p>
+                                <span className="action-btn">
+                                    <i className="fa fa-shopping-bag bags"></i>
+                                </span>
+                            </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="swiper-slide">
+                            <div className="cards-md">
+                                <div className="cards-md__img-wrapper">
+                                    <a href="product-details.html">
+                                        <img src="assets/images/products/img-05.png" alt="products" />
+                                    </a>
+                                    
+                                     <div className="cards-md__favs-list">
+                                <span className="action-btn">
+                                     <i className="fa fa-heart"></i>
+                                </span>
+                                <span className="action-btn" data-bs-toggle="modal" data-bs-target="#productView">
+                                    <i className="fa fa-eye"></i>
+                                </span>
+                            </div>
+                                </div>
+                                <div className="cards-md__info d-flex justify-content-between align-items-center">
+                                    <a href="product-details.html" className="cards-md__info-left">
+                                        <h6 className="font-body--md-400">Dummy</h6>
+                                        <div className="cards-md__info-price">
+                                            <span className="font-body--lg-500">$14.99</span>
+                                            <del className="font-body--lg-400">$14.99</del>
+                                        </div>
+                                        <ul className="cards-md__info-rating d-flex">
+                                    <li>
+                                        <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-smalls"></i>
+                                    </li>
+                                </ul>
+                                    </a>
+                                    <div className="cards-md__info-right text-center">
+                                <p className="text-black">Add to Cart</p>
+                                <span className="action-btn">
+                                    <i className="fa fa-shopping-bag bags"></i>
+                                </span>
+                            </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="swiper-slide">
+                            <div className="cards-md">
+                                <div className="cards-md__img-wrapper">
+                                    <a href="product-details.html">
+                                        <img src="assets/images/products/img-06.png" alt="products" />
+                                    </a>
+                                    
+                                    <div className="cards-md__favs-list">
+                                <span className="action-btn">
+                                     <i className="fa fa-heart"></i>
+                                </span>
+                                <span className="action-btn" data-bs-toggle="modal" data-bs-target="#productView">
+                                    <i className="fa fa-eye"></i>
+                                </span>
+                            </div>
+                                </div>
+                                <div className="cards-md__info d-flex justify-content-between align-items-center">
+                                    <a href="product-details.html" className="cards-md__info-left">
+                                        <h6 className="font-body--md-400">Dummy</h6>
+                                        <div className="cards-md__info-price">
+                                            <span className="font-body--lg-500">$14.99</span>
+                                            <del className="font-body--lg-400">$14.99</del>
+                                        </div>
+                                        <ul className="cards-md__info-rating d-flex">
+                                    <li>
+                                        <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-smalls"></i>
+                                    </li>
+                                </ul>
+                                    </a>
+                                   <div className="cards-md__info-right text-center">
+                                <p className="text-black">Add to Cart</p>
+                                <span className="action-btn">
+                                    <i className="fa fa-shopping-bag bags"></i>
+                                </span>
+                            </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="swiper-pagination"></div>
+                </div>
+            </div>
+        </section>
+
+        <section className="banner-sale section--lg pb-0">
+            <div className="container">
+                <div className="banner-sale__img-wrapper">
+                    <img src="assets/images/banner/banner-lg-16.jpg" alt="banner" />
+
+                    <div className="banner-sale__text-content">
+                        <h5>Summber Sale</h5>
+                        <h2>37% <span>OFF</span></h2>
+                        <p className="font-body--lg-400">
+                            Free on all your order, Free Shipping and 30 days money-back guarantee
+                        </p>
+                        <a href="#" className="button button--md">
+                            Shop now
+                            <span>
+                                <i className="fa fa-arrow-right whit"></i>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section className="section section--lg featured pb-0">
+            <div className="container">
+                <div className="section__head">
+                    <h2 className="section--title-one font-title--sm">Featured Products</h2>
+                    <a href="shop-01.html">
+                        View All
+                        <span>
+                            <i className="fa fa-arrow-right"></i>
+                        </span>
+                    </a>
+                </div>
+                <div className="swiper-container featured-slider--one">
+                    <div className="swiper-wrapper">
+                        <Slider {...settings}>
+                            <div className="swiper-slide">
+                                <div className="cards-md w-100">
+                                    <div className="cards-md__img-wrapper">
+                                        <a href="product-details.html">
+                                            <img src="assets/images/products/img-02.png" alt="products" />
+                                        </a>
+                                        <span className="tag danger font-body--md-400">sale 50%</span>
+                                        <div className="cards-md__favs-list">
+                                    <span className="action-btn">
+                                        <i className="fa fa-heart"></i>
+                                    </span>
+                                    <span className="action-btn" data-bs-toggle="modal" data-bs-target="#productView">
+                                        <i className="fa fa-eye"></i>
+                                    </span>
+                                </div>
+                                    </div>
+                                    <div className="cards-md__info d-flex justify-content-between align-items-center">
+                                        <a href="product-details.html" className="cards-md__info-left">
+                                            <h6 className="font-body--md-400">Dummy</h6>
+                                            <div className="cards-md__info-price">
+                                                <span className="font-body--lg-500">$14.99</span>
+                                                <del className="font-body--lg-400">$14.99</del>
+                                            </div>
+                                            <ul className="cards-md__info-rating d-flex">
+                                        <li>
+                                            <i className="fa fa-star star-small"></i>
+                                        </li>
+                                        <li>
+                                        <i className="fa fa-star star-small"></i>
+                                        </li>
+                                        <li>
+                                        <i className="fa fa-star star-small"></i>
+                                        </li>
+                                        <li>
+                                        <i className="fa fa-star star-small"></i>
+                                        </li>
+                                        <li>
+                                        <i className="fa fa-star star-smalls"></i>
+                                        </li>
+                                    </ul>
+                                        </a>
+                                        <div className="cards-md__info-right text-center">
+                                    <p className="text-black">Add to Cart</p>
+                                    <span className="action-btn">
+                                        <i className="fa fa-shopping-bag bags"></i>
+                                    </span>
+                                </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="swiper-slide">
+                                <div className="cards-md w-100">
+                                    <div className="cards-md__img-wrapper">
+                                        <a href="product-details.html">
+                                            <img src="assets/images/products/img-01.png" alt="products" />
+                                        </a>
+                                        
+                                        <div className="cards-md__favs-list">
+                                    <span className="action-btn">
+                                        <i className="fa fa-heart"></i>
+                                    </span>
+                                    <span className="action-btn" data-bs-toggle="modal" data-bs-target="#productView">
+                                        <i className="fa fa-eye"></i>
+                                    </span>
+                                </div>
+                                    </div>
+                                    <div className="cards-md__info d-flex justify-content-between align-items-center">
+                                        <a href="product-details.html" className="cards-md__info-left">
+                                            <h6 className="font-body--md-400">Dummy</h6>
+                                            <div className="cards-md__info-price">
+                                                <span className="font-body--lg-500">$14.99</span>
+                                                <del className="font-body--lg-400">$14.99</del>
+                                            </div>
+                                            <ul className="cards-md__info-rating d-flex">
+                                        <li>
+                                            <i className="fa fa-star star-small"></i>
+                                        </li>
+                                        <li>
+                                        <i className="fa fa-star star-small"></i>
+                                        </li>
+                                        <li>
+                                        <i className="fa fa-star star-small"></i>
+                                        </li>
+                                        <li>
+                                        <i className="fa fa-star star-small"></i>
+                                        </li>
+                                        <li>
+                                        <i className="fa fa-star star-smalls"></i>
+                                        </li>
+                                    </ul>
+                                        </a>
+                                        <div className="cards-md__info-right text-center">
+                                    <p className="text-black">Add to Cart</p>
+                                    <span className="action-btn">
+                                        <i className="fa fa-shopping-bag bags"></i>
+                                    </span>
+                                </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="swiper-slide">
+                                <div className="cards-md w-100">
+                                    <div className="cards-md__img-wrapper">
+                                        <a href="product-details.html">
+                                            <img src="assets/images/products/img-03.png" alt="products" />
+                                        </a>
+                                        
+                                        <div className="cards-md__favs-list">
+                                    <span className="action-btn">
+                                        <i className="fa fa-heart"></i>
+                                    </span>
+                                    <span className="action-btn" data-bs-toggle="modal" data-bs-target="#productView">
+                                        <i className="fa fa-eye"></i>
+                                    </span>
+                                </div>
+                                    </div>
+                                    <div className="cards-md__info d-flex justify-content-between align-items-center">
+                                        <a href="product-details.html" className="cards-md__info-left">
+                                            <h6 className="font-body--md-400">Dummy</h6>
+                                            <div className="cards-md__info-price">
+                                                <span className="font-body--lg-500">$14.99</span>
+                                                <del className="font-body--lg-400">$14.99</del>
+                                            </div>
+                                            <ul className="cards-md__info-rating d-flex">
+                                        <li>
+                                            <i className="fa fa-star star-small"></i>
+                                        </li>
+                                        <li>
+                                        <i className="fa fa-star star-small"></i>
+                                        </li>
+                                        <li>
+                                        <i className="fa fa-star star-small"></i>
+                                        </li>
+                                        <li>
+                                        <i className="fa fa-star star-small"></i>
+                                        </li>
+                                        <li>
+                                        <i className="fa fa-star star-smalls"></i>
+                                        </li>
+                                    </ul>
+                                        </a>
+                                    <div className="cards-md__info-right text-center">
+                                    <p className="text-black">Add to Cart</p>
+                                    <span className="action-btn">
+                                        <i className="fa fa-shopping-bag bags"></i>
+                                    </span>
+                                </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="swiper-slide">
+                                <div className="cards-md w-100">
+                                    <div className="cards-md__img-wrapper">
+                                        <a href="product-details.html">
+                                            <img src="assets/images/products/img-04.png" alt="products" />
+                                        </a>
+                                        
+                                        <div className="cards-md__favs-list">
+                                    <span className="action-btn">
+                                        <i className="fa fa-heart"></i>
+                                    </span>
+                                    <span className="action-btn" data-bs-toggle="modal" data-bs-target="#productView">
+                                        <i className="fa fa-eye"></i>
+                                    </span>
+                                </div>
+                                    </div>
+                                    <div className="cards-md__info d-flex justify-content-between align-items-center">
+                                        <a href="product-details.html" className="cards-md__info-left">
+                                            <h6 className="font-body--md-400">Dummy</h6>
+                                            <div className="cards-md__info-price">
+                                                <span className="font-body--lg-500">$14.99</span>
+                                                <del className="font-body--lg-400">$14.99</del>
+                                            </div>
+                                            <ul className="cards-md__info-rating d-flex">
+                                        <li>
+                                            <i className="fa fa-star star-small"></i>
+                                        </li>
+                                        <li>
+                                        <i className="fa fa-star star-small"></i>
+                                        </li>
+                                        <li>
+                                        <i className="fa fa-star star-small"></i>
+                                        </li>
+                                        <li>
+                                        <i className="fa fa-star star-small"></i>
+                                        </li>
+                                        <li>
+                                        <i className="fa fa-star star-smalls"></i>
+                                        </li>
+                                    </ul>
+                                        </a>
+                                        <div className="cards-md__info-right text-center">
+                                    <p className="text-black">Add to Cart</p>
+                                    <span className="action-btn">
+                                        <i className="fa fa-shopping-bag bags"></i>
+                                    </span>
+                                </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="swiper-slide">
+                                <div className="cards-md w-100">
+                                    <div className="cards-md__img-wrapper">
+                                        <a href="product-details.html">
+                                            <img src="assets/images/products/img-05.png" alt="products" />
+                                        </a>
+                                        
+                                        <div className="cards-md__favs-list">
+                                    <span className="action-btn">
+                                        <i className="fa fa-heart"></i>
+                                    </span>
+                                    <span className="action-btn" data-bs-toggle="modal" data-bs-target="#productView">
+                                        <i className="fa fa-eye"></i>
+                                    </span>
+                                </div>
+                                    </div>
+                                    <div className="cards-md__info d-flex justify-content-between align-items-center">
+                                        <a href="product-details.html" className="cards-md__info-left">
+                                            <h6 className="font-body--md-400">Dummy</h6>
+                                            <div className="cards-md__info-price">
+                                                <span className="font-body--lg-500">$14.99</span>
+                                                <del className="font-body--lg-400">$14.99</del>
+                                            </div>
+                                            <ul className="cards-md__info-rating d-flex">
+                                        <li>
+                                            <i className="fa fa-star star-small"></i>
+                                        </li>
+                                        <li>
+                                        <i className="fa fa-star star-small"></i>
+                                        </li>
+                                        <li>
+                                        <i className="fa fa-star star-small"></i>
+                                        </li>
+                                        <li>
+                                        <i className="fa fa-star star-small"></i>
+                                        </li>
+                                        <li>
+                                        <i className="fa fa-star star-smalls"></i>
+                                        </li>
+                                    </ul>
+                                        </a>
+                                        <div className="cards-md__info-right text-center">
+                                    <p className="text-black">Add to Cart</p>
+                                    <span className="action-btn">
+                                        <i className="fa fa-shopping-bag bags"></i>
+                                    </span>
+                                </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="swiper-slide">
+                                <div className="cards-md w-100">
+                                    <div className="cards-md__img-wrapper">
+                                        <a href="product-details.html">
+                                            <img src="assets/images/products/img-06.png" alt="products" />
+                                        </a>
+                                        
+                                        <div className="cards-md__favs-list">
+                                    <span className="action-btn">
+                                        <i className="fa fa-heart"></i>
+                                    </span>
+                                    <span className="action-btn" data-bs-toggle="modal" data-bs-target="#productView">
+                                        <i className="fa fa-eye"></i>
+                                    </span>
+                                </div>
+                                    </div>
+                                    <div className="cards-md__info d-flex justify-content-between align-items-center">
+                                        <a href="product-details.html" className="cards-md__info-left">
+                                            <h6 className="font-body--md-400">Dummy</h6>
+                                            <div className="cards-md__info-price">
+                                                <span className="font-body--lg-500">$14.99</span>
+                                                <del className="font-body--lg-400">$14.99</del>
+                                            </div>
+                                            <ul className="cards-md__info-rating d-flex">
+                                        <li>
+                                            <i className="fa fa-star star-small"></i>
+                                        </li>
+                                        <li>
+                                        <i className="fa fa-star star-small"></i>
+                                        </li>
+                                        <li>
+                                        <i className="fa fa-star star-small"></i>
+                                        </li>
+                                        <li>
+                                        <i className="fa fa-star star-small"></i>
+                                        </li>
+                                        <li>
+                                        <i className="fa fa-star star-smalls"></i>
+                                        </li>
+                                    </ul>
+                                        </a>
+                                    <div className="cards-md__info-right text-center">
+                                    <p className="text-black">Add to Cart</p>
+                                    <span className="action-btn">
+                                        <i className="fa fa-shopping-bag bags"></i>
+                                    </span>
+                                </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </Slider>
+                    </div>
+                    <div className="swiper-pagination featured-pagination"></div>
+                </div>
+            </div>
+        </section>
+
+        <section className="testimonial section section--gray-0 section--lg">
+            <div className="container">
+                <div className="section__head">
+                    <h2 className="section--title-one font-title--sm">Client Testimonials</h2>
+                    {/* <div className="arrows">
+                        <button className="arrows__btn swiper-button--prev">
+                            <i className="fa fa-arrow-left"></i>
+                        </button>
+                        <button className="arrows__btn swiper-button--next">
+                            <i className="fa fa-arrow-right"></i>
+                        </button>
+                    </div> */}
+                </div>
+                <div className="swiper-container testimonial-slider--one">
+                    <div className="swiper-wrapper">
+                    <Slider {...settingsTestimonials}>
+
+                        <div className="swiper-slide s1">
+                            <div className="cards-tm">
+                                <p className="cards-tm__text font-body--md-400">
+                                    Pellentesque eu nibh eget mauris congue mattis mattis nec tellus. Phasellus imperdiet elit eu magna dictum, bibendum cursus velit sodales. Donec sed neque eget
+                                </p>
+                                <div className="cards-tm__info d-flex align-items-center justify-content-between">
+                                    <div className="cards-tm__info-left d-flex align-items-center">
+                                        <div className="cards-tm__info--user-img">
+                                            <img src="assets/images/user/img-01.png" alt="user" />
+                                        </div>
+                                        <div className="cards-tm__info-left--designation">
+                                            <h2 className="font-body--lg-500">Robert Fox</h2>
+                                            <span className="font-body--md-400"> Customer </span>
+                                        </div>
+                                    </div>
+                                    <div className="cards-tm__info-right">
+                                       
+                                        <ul className="d-flex align-items-center">
+                                    <li>
+                                        <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                </ul>
+                                    </div>
+                                </div>
+                                <span className="quotes">
+                                   <i className="fa fa-quote-left fa-2x"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div className="swiper-slide s1">
+                            <div className="cards-tm">
+                                <p className="cards-tm__text font-body--md-400">
+                                    Pellentesque eu nibh eget mauris congue mattis mattis nec tellus. Phasellus imperdiet elit eu magna dictum, bibendum cursus velit sodales. Donec sed neque eget
+                                </p>
+                                <div className="cards-tm__info d-flex align-items-center justify-content-between">
+                                    <div className="cards-tm__info-left d-flex align-items-center">
+                                        <div className="cards-tm__info--user-img">
+                                            <img src="assets/images/user/img-02.png" alt="user" />
+                                        </div>
+                                        <div className="cards-tm__info-left--designation">
+                                            <h2 className="font-body--lg-500">Dianne Russell</h2>
+                                            <span className="font-body--md-400"> Customer </span>
+                                        </div>
+                                    </div>
+                                    <div className="cards-tm__info-right">
+                                        <ul className="d-flex align-items-center">
+                                    <li>
+                                        <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                </ul>
+                                    </div>
+                                </div>
+                                <span className="quotes">
+                                    <i className="fa fa-quote-left fa-2x"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div className="swiper-slide s1">
+                            <div className="cards-tm">
+                                <p className="cards-tm__text font-body--md-400">
+                                    Pellentesque eu nibh eget mauris congue mattis mattis nec tellus. Phasellus imperdiet elit eu magna dictum, bibendum cursus velit sodales. Donec sed neque eget
+                                </p>
+                                <div className="cards-tm__info d-flex align-items-center justify-content-between">
+                                    <div className="cards-tm__info-left d-flex align-items-center">
+                                        <div className="cards-tm__info--user-img">
+                                            <img src="assets/images/user/img-01.png" alt="user" />
+                                        </div>
+                                        <div className="cards-tm__info-left--designation">
+                                            <h2 className="font-body--lg-500">Robert Fox</h2>
+                                            <span className="font-body--md-400"> Customer </span>
+                                        </div>
+                                    </div>
+                                    <div className="cards-tm__info-right">
+                                        <ul className="d-flex align-items-center">
+                                    <li>
+                                        <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                </ul>
+                                    </div>
+                                </div>
+                                <span className="quotes">
+                                     <i className="fa fa-quote-left fa-2x"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div className="swiper-slide s1">
+                            <div className="cards-tm">
+                                <p className="cards-tm__text font-body--md-400">
+                                    Pellentesque eu nibh eget mauris congue mattis mattis nec tellus. Phasellus imperdiet elit eu magna dictum, bibendum cursus velit sodales. Donec sed neque eget
+                                </p>
+                                <div className="cards-tm__info d-flex align-items-center justify-content-between">
+                                    <div className="cards-tm__info-left d-flex align-items-center">
+                                        <div className="cards-tm__info--user-img">
+                                            <img src="assets/images/user/img-01.png" alt="user" />
+                                        </div>
+                                        <div className="cards-tm__info-left--designation">
+                                            <h2 className="font-body--lg-500">Robert Fox</h2>
+                                            <span className="font-body--md-400"> Customer </span>
+                                        </div>
+                                    </div>
+                                    <div className="cards-tm__info-right">
+                                        <ul className="d-flex align-items-center">
+                                    <li>
+                                        <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                    <li>
+                                       <i className="fa fa-star star-small"></i>
+                                    </li>
+                                </ul>
+                                    </div>
+                                </div>
+                                <span className="quotes">
+                                     <i className="fa fa-quote-left fa-2x"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </Slider>
+                    </div>
+                    <div className="swiper-pagination"></div>
+                </div>
+            </div>
+        </section>
+
+                        
+            </div>
+        );
+    }
+}
+
+export default Home;

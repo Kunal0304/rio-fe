@@ -1,0 +1,9 @@
+export const APP_NAME = "Rio Aarman";
+export const BASE_URL = "https://superbrassware.com/rioaarman/api";
+export const REQUEST_TIMEOUT = 6000;
+export const CURRENCY = "₹​";
+export const CLIENT_ADDRESS_SHORT="B5 Building,Gala No 12,13,14, Mumbai - Nashik Expy, Bhiwandi, Maharashtra";
+export const CLIENT_ADDRESS_FULL="B5 Building,Gala No 12,13,14, Mumbai Nashik Expy, road,  batla village, Vehele, Bhiwandi, 421302"
+export const CLIENT_CONTACT="+91 89566 16600";
+export const CLIENT_EMAIL_PRIMARY="superbrassware@gmail.com";
+export const CLIENT_EMAIL_SALES="superbrassware@gmail.com";

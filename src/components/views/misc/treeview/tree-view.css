@@ -1,0 +1,57 @@
+.tree-view-cont {
+    position: relative;
+    overflow: auto;
+}
+
+.parent-list {
+    height: 100%;
+    width: fit-content;
+    display: block;
+    margin: 0 5px;
+    padding: 0 !important;
+}
+
+.tree-view-list {
+    position: relative;
+    list-style: none;
+    padding: 0 15px;
+}
+
+.tree-view-node {
+    display: block;
+    white-space: nowrap;
+    position: relative;
+}
+
+.tree-view-node.collapse-tree .tree-view-list{
+    display: none;
+}
+
+.node-picker {
+    position: absolute;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 1px solid;
+    margin: 5px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 15px;
+    -webkit-user-select: none;
+    user-select: none;
+    cursor: pointer;
+    top: 3px;
+    left: 0;
+}
+
+.node-link {
+    display: inline-block;
+    padding: 5px 0;
+    margin-left: 35px;
+    color: black;
+}
+
+.node-link.active {
+    font-weight: 700;
+}
